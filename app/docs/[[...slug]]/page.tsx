@@ -8,6 +8,9 @@ import {
 import { notFound } from 'next/navigation';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 
+// For styling math in markdown
+import 'katex/dist/katex.css';
+
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
 }) {
