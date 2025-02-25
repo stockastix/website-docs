@@ -1,3 +1,6 @@
+# this is a symlink to a node dependency
+content/docs/technical-indicators/*
+
 # deps
 /node_modules
 
