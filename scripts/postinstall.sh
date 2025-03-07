@@ -10,7 +10,9 @@ cd ./content/docs
 ln -sfn ../../node_modules/@stockastix/technical-indicators/src/ technical-indicators
 # delete json files, otherwise it confuses fumadocs
 # https://stackoverflow.com/a/42655267/18612308
-rm -f ./content/docs/technical-indicators/**/*.test.json 
+rm -f ./content/docs/technical-indicators/**/*.test.json
+# otherwise npm run build complains because it tries to process the typescript files
+rm -f ./content/docs/technical-indicators/__test__
 # move back to root
 cd ../..
 
