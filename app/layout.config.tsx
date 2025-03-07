@@ -1,4 +1,7 @@
-import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
+import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
+import Image from "next/image";
+
+import { PROJECT, URL } from "@stockastix/meta";
 
 /**
  * Shared layout configurations
@@ -9,25 +12,25 @@ import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
  */
 export const baseOptions: BaseLayoutProps = {
   nav: {
+    url: URL,
     title: (
       <>
-        <svg
+        <Image
+          src="https://res.cloudinary.com/dsotf1kzl/image/upload/v1592310840/icons/threeballs.png"
+          alt="logo"
           width="24"
           height="24"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-label="Logo"
-        >
-          <circle cx={12} cy={12} r={12} fill="currentColor" />
-        </svg>
-        My App
+        />
+        {PROJECT}
       </>
     ),
   },
   links: [
     {
-      text: 'Documentation',
-      url: '/docs',
-      active: 'nested-url',
+      text: "Documentation",
+      url: "/docs",
+      active: "nested-url",
     },
   ],
+  githubUrl: "https://github.com/stockastix",
 };
