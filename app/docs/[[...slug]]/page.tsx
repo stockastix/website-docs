@@ -1,15 +1,18 @@
-import { source } from '@/lib/source';
+import { notFound } from "next/navigation";
+import { getGithubLastEdit } from "fumadocs-core/server";
+import defaultMdxComponents from "fumadocs-ui/mdx";
 import {
   DocsPage,
   DocsBody,
   DocsDescription,
   DocsTitle,
-} from 'fumadocs-ui/page';
-import { notFound } from 'next/navigation';
-import defaultMdxComponents from 'fumadocs-ui/mdx';
+} from "fumadocs-ui/page";
+
+import { XInput } from "@/app/components/XInput";
+import { source } from "@/lib/source";
 
 // For styling math in markdown
-import 'katex/dist/katex.css';
+import "katex/dist/katex.css";
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
@@ -18,14 +21,39 @@ export default async function Page(props: {
   const page = source.getPage(params.slug);
   if (!page) notFound();
 
-  const MDX = page.data.body;
+  const { body: MDX, title, description, toc, full } = page.data;
+
+  const [category, name] = params.slug ?? [];
+  const isTechnicalIndicatorPage = category === "technical-indicators" && name;
+  const editOnGithub = {
+    owner: "stockastix",
+    repo: "technical-indicators",
+    sha: "main",
+    // file path, make sure it's valid
+    path: `content/docs/${page.file.path}`,
+  };
+  const lastModifiedTime = isTechnicalIndicatorPage
+    ? await getGithubLastEdit(editOnGithub)
+    : null;
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
-      <DocsTitle>{page.data.title}</DocsTitle>
-      <DocsDescription>{page.data.description}</DocsDescription>
+    <DocsPage
+      breadcrumb={{ includeSeparator: true }}
+      full={full}
+      toc={toc}
+      lastUpdate={lastModifiedTime ? new Date(lastModifiedTime) : undefined}
+      editOnGithub={lastModifiedTime ? editOnGithub : undefined}
+    >
+      <DocsTitle>{title}</DocsTitle>
+      {description && <DocsDescription>{description}</DocsDescription>}
+
       <DocsBody>
-        <MDX components={{ ...defaultMdxComponents }} />
+        <MDX
+          components={{
+            ...defaultMdxComponents,
+            code: XInput,
+          }}
+        />
       </DocsBody>
     </DocsPage>
   );
