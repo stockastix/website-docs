@@ -1,13 +1,121 @@
 ---
-title: Hello World
-description: Your first document
+title: Getting started
 ---
 
-Welcome to the docs! You can start writing documents in `/content/docs`.
+import { Pre, CodeBlock } from "fumadocs-ui/components/codeblock";
+import { PROJECT } from "@stockastix/meta";
 
-## What is Next?
+export const description = `Your first steps with ${PROJECT}`;
 
-<Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.vercel.app" />
-</Cards>
+In this introduction, you will build a custom indicator step-by-step,
+as a typical showcase of what you can do with {PROJECT}.
+Of course, {PROJECT} allows for much more, including _backtesting_ and _optimizing_.
+But indicators are at the root of each trading strategy.
+
+## 1. Log into your account
+
+## 2. Create a study
+
+<Callout>
+  A _study_ is a place where you can define, refine, and test indicators and
+  trading strategies. You can save studies in your personal space so you can use
+  them later on, and/or work on several studies in parallel.
+</Callout>
+
+Click <code>new study</code> from the top menu of your account.
+This will open a page to enter general information about the study:
+
+- give it a **_name_**,
+- an optional **description**,
+- whether it is **private** or not (i.e. visible to everyone, or just to yourself),
+- and most importantly, specify which **type** of study you are about to make.
+  In our particular case, leave the default value <code>time</code>.
+  This tells that you are about to build an indicator,
+  and you are willing to visualize it over time.
+
+When you are good to go, click the <code>Create study</code> button.
+
+## 3. Build your custom indicator
+
+For the sake of this guide, you are going to build the RSI indicator from scratch
+(RSI is a well-known indicator in technical analysis).
+This is for illustration-purpose only, because the rsi indicator is built-in the tool:
+you normally do not need to build it by yourself.
+
+<Callout>
+  Whenever an indicator is natively available, it is recommended to resort to
+  the built-in indicator: not only is it simpler, but it also improves
+  performance.
+</Callout>
+
+### 3.1 Define aliases
+
+Aliases are handy names that can be used in place of more complex [expressions](./docs/expression). You can choose whatever name you like,
+and assign it an (expression) value. Once an alias is defined, you can use it anywhere
+in subsequent expressions.
+
+`^DJI` represents the [symbol](./docs/symbols) for the Dow Jones historical data.
+You could very well use this symbol through all of the tutorial,
+but defining a more explicit name is handy.
+
+<CodeBlock title="Create an explicit alias for the Dow Jones index symbol">
+  <Pre>`Dow = ^DJI`</Pre>
+</CodeBlock>
+
+<Callout>
+  Tip: you can copy/paste the examples from this page directly into the tool.
+</Callout>
+
+In the next lines, `previous`, `ema`, `max` are all built-in indicators
+(check their respective documentation page if you would like to learn more).
+`delta`, `AverageGain` and `AverageLoss` become aliases for the right-hand side of the equal sign.
+
+<CodeBlock title="Stores each daily variation of the Dow index">
+  <Pre>`delta = Dow - previous(Dow, 1)`</Pre>
+</CodeBlock>
+
+<CodeBlock title="Creates exponential moving averages of daily gains and daily losses">
+  <Pre>
+`AverageGain = ema( max(delta, 0), 27)`
+
+`AverageLoss = ema( -min(delta, 0), 27)`
+
+  </Pre>
+</CodeBlock>
+
+Finally, define your custom indicator, as per the [RSI definition](https://en.wikipedia.org/wiki/Relative_strength_index):
+
+<CodeBlock title="Creates custom indicator">
+  <Pre>`MyCustomRSI = 100 * AverageGain / ( AverageLoss + AverageGain )`</Pre>
+</CodeBlock>
+
+### 3.2 Draw on a chart
+
+Now, you can visualise the indicator. In the _draw_ section, under _Axis #1_, enter:
+
+```
+MyCustomRSI
+```
+
+Should you want to visualize altogether with the Dow Jones historical data,
+click to create a second axis, and request to draw the stock index as well:
+
+```
+Dow
+```
+
+You could also draw the RSI by using the built-in indicator:
+
+```
+rsi(Dow, 14)
+```
+
+If you draw it in the same axis as your custom RSI indicator,
+only a single line will show on the graph: this is because the custom indicator
+is exactly the same as the native RSI, so the latter exactly overlaps the former.
+
+Feel free to play by changing the period of the RSI, or change the underlying asset;
+update the graph with the new settings.
+
+Congratulations, you have created your first indicator
+and are now ready to create your own!
