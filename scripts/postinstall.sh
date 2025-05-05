@@ -2,7 +2,7 @@
 
 # copy from @technical-indicators so that its content is taken into account
 # when creating documentation
-cp -a ./node_modules/@stockastix/technical-indicators/src/ technical-indicators
+cp -a ./node_modules/@stockastix/technical-indicators/src/. ./content/docs/technical-indicators
 # delete json files, otherwise it confuses fumadocs
 # https://stackoverflow.com/a/42655267/18612308
 rm -f ./content/docs/technical-indicators/**/*.test.json
