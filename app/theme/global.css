@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@import "./dark-high-contrast.css";
+@import "./color.css";
+@import "fumadocs-ui/css/preset.css";
+
+@source '../../node_modules/fumadocs-ui/dist/**/*.js';
