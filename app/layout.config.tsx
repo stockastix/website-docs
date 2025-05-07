@@ -1,7 +1,7 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 import Image from "next/image";
 
-import { PROJECT, URL } from "@stockastix/meta";
+import { PROJECT, URL, LOGO } from "@stockastix/meta";
 
 /**
  * Shared layout configurations
@@ -12,15 +12,10 @@ import { PROJECT, URL } from "@stockastix/meta";
  */
 export const baseOptions: BaseLayoutProps = {
   nav: {
-    url: URL,
+    url: "/", // URL,
     title: (
       <>
-        <Image
-          src="https://res.cloudinary.com/dsotf1kzl/image/upload/v1592310840/icons/threeballs.png"
-          alt="logo"
-          width="24"
-          height="24"
-        />
+        {LOGO && <Image src={LOGO} alt="logo" width="24" height="24" />}
         {PROJECT}
       </>
     ),
