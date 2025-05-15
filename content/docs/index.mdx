@@ -12,9 +12,7 @@ as a typical showcase of what you can do with {PROJECT}.
 Of course, {PROJECT} allows for much more, including _backtesting_ and _optimizing_.
 But indicators are at the root of each trading strategy.
 
-## 1. Log into your account
-
-## 2. Create a study
+## 1. Create a study
 
 <Callout>
   A _study_ is a place where you can define, refine, and test indicators and
@@ -22,7 +20,7 @@ But indicators are at the root of each trading strategy.
   them later on, and/or work on several studies in parallel.
 </Callout>
 
-Click <code>new study</code> from the top menu of your account.
+Click <code>new study</code> from your account top right-hand corner menu.
 This will open a page to enter general information about the study:
 
 - give it a **_name_**,
@@ -35,7 +33,7 @@ This will open a page to enter general information about the study:
 
 When you are good to go, click the <code>Create study</code> button.
 
-## 3. Build your custom indicator
+## 2. Build your custom indicator
 
 For the sake of this guide, you are going to build the RSI indicator from scratch
 (RSI is a well-known indicator in technical analysis).
@@ -48,7 +46,7 @@ you normally do not need to build it by yourself.
   performance.
 </Callout>
 
-### 3.1 Define aliases
+### 2.1 Define aliases
 
 Aliases are handy names that can be used in place of more complex [expressions](./docs/expression). You can choose whatever name you like,
 and assign it an (expression) value. Once an alias is defined, you can use it anywhere
@@ -89,7 +87,7 @@ Finally, define your custom indicator, as per the [RSI definition](https://en.wi
   <Pre>`MyCustomRSI = 100 * AverageGain / ( AverageLoss + AverageGain )`</Pre>
 </CodeBlock>
 
-### 3.2 Draw on a chart
+### 2.2 Draw on a chart
 
 Now, you can visualise the indicator. In the _draw_ section, under _Axis #1_, enter:
 
