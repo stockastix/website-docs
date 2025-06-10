@@ -1,0 +1,44 @@
+---
+title: Expressions
+description: ""
+---
+
+Expressions are any type of (numerical) data series.
+In their simplest form, they represent historical values of stocks,
+or of other type of assets, as represented by their symbol.
+More complex expressions can be created by means of indicators, operations,
+and any combination thereof, hence creating new indicators.
+
+### Examples
+
+- Apple Inc. historical data
+
+```
+AAPL
+```
+
+- A simple 200-day moving average:
+
+```
+sma(AAPL, 200)
+```
+
+- A complex expression:
+
+```
+sma(AAPL, 200) + sma( stddev(AAPL, 50), 20 )
+```
+
+## How to create expressions
+
+<Cards>
+  <Card title="Asset historical values" href="./symbols">
+    By their symbol
+  </Card>
+  <Card title="Technical Indicators" href="./technical-indicators">
+    Use built-in indicators
+  </Card>
+  <Card title="Operations" href="./operation">
+    Perform standard math operations
+  </Card>
+</Cards>

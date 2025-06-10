@@ -1,0 +1,16 @@
+---
+title: Trading signals
+description: ""
+---
+
+Conditions represent trading signals. At each single time, they can be true
+(which means a trading signal is triggered), false, or not defined (in case
+the underlying data is not available at that time).
+
+### Examples
+
+- Apple Inc. crossing its moving average
+
+```
+AAPL crossover sma(AAPL, 200)
+```
