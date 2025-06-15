@@ -1,0 +1,3 @@
+{
+  "pages": ["rsi/index", "stddev/index", "...ema", "...*/*", "!.json"]
+}
