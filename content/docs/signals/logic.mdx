@@ -1,0 +1,18 @@
+---
+title: Logical Operations
+description: ""
+---
+
+Usual logical operations can apply to [conditions](../condition).
+
+### Examples
+
+import { Tab, Tabs } from "fumadocs-ui/components/tabs";
+
+```txt tab="and"
+sma(AAPL, 20) < AAPL * 1.2 & sma(AAPL, 20) > AAPL * 0.8
+```
+
+```txt tab="or"
+sma(AAPL, 20) < AAPL * 0.8 | sma(AAPL, 20) > AAPL * 1.2
+```
