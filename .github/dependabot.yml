@@ -1,0 +1,35 @@
+# https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "semiannually"
+
+  # Maintain dependencies for npm
+  - package-ecosystem: "npm"
+    directories: ["/", "/packages/*/"]
+    schedule:
+      interval: "monthly"
+    ignore:
+      # I want the version of @type/node to match my installed version of node
+      # (at least have the same major version)
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
+    # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/optimizing-pr-creation-version-updates
+    # (by convention, I start with the down-most in the build/dev chain, and go upstream;
+    # this is because e.g. a bump of typescript version might trigger a bump in @rollup/plugin-typscript,
+    # and the two _could_ be bound together)
+    groups:
+      typescript-dependencies:
+        patterns:
+          - "*typescript*"
+      react-dependencies:
+        patterns:
+          - "*react*"
+      fumadocs-dependencies:
+        patterns:
+          - "*fumadocs*"
