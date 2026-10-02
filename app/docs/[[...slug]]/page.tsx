@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getGithubLastEdit } from "fumadocs-core/server";
+import { getGithubLastEdit } from "fumadocs-core/content/github";
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import {
   DocsPage,
@@ -24,13 +24,12 @@ export default async function Page(props: {
   const { body: MDX, title, description, toc, full } = page.data;
 
   const [category, name] = params.slug ?? [];
-  const isTechnicalIndicatorPage = category === "technical-indicators" && name;
+  const isTechnicalIndicatorPage = category === "indicators" && name;
   const editOnGithub = {
     owner: "stockastix",
     repo: "technical-indicators",
     sha: "main",
-    // file path, make sure it's valid
-    path: `content/docs/${page.file.path}`,
+    path: `content/docs/${page.path}`,
   };
   const lastModifiedTime = isTechnicalIndicatorPage
     ? await getGithubLastEdit(editOnGithub)

@@ -1,5 +1,5 @@
 import "./theme/global.css";
-import { RootProvider } from "fumadocs-ui/provider";
+import { RootProvider } from "fumadocs-ui/provider/next";
 import { Inter } from "next/font/google";
 import type { ReactNode } from "react";
 
@@ -19,6 +19,23 @@ export default function Layout({ children }: { children: ReactNode }) {
       data-light-theme="dark_high_contrast"
     >
       <head>
+        <script
+          type="importmap"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(
+              {
+                imports: {
+                  "@stockastix/parse": "/parse.min.js",
+                  "@stockastix/parse/base.json": "/lang.base.json",
+                  "#style/x-input.css": "/x-input.css",
+                },
+              },
+              null,
+              2,
+            ),
+          }}
+        />
+
         {/* Google tag (gtag.js) */}
         <script
           async
@@ -35,6 +52,8 @@ export default function Layout({ children }: { children: ReactNode }) {
           `,
           }}
         />
+
+        <script src="/x-input.min.js" type="module" />
       </head>
       <body className="flex flex-col min-h-screen">
         <RootProvider>{children}</RootProvider>
