@@ -4,3 +4,12 @@
 # ref https://www.mohamedinfath.com/blog/netlify-secrets-scanning-turbopack-cache
 [build.environment]
   SECRETS_SCAN_OMIT_PATHS = ".netlify/.next/cache/**,.next/cache/**"
+
+[[headers]]
+  for = "/lang.base.json"
+  [headers.values]
+    Cache-Control = '''
+    public,
+    max-age=0'''
+    Content-Type = "application/json"
+    X-Content-Type-Options = "nosniff"
