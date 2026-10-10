@@ -5,3 +5,10 @@
 
 /* relative to the CSS file, make sure it's correct for your app */
 @source '../../node_modules/fumadocs-ui/dist/**/*.js';
+
+/* for some reason fumadocs has a rule setting pre > * {flex-direction: column} 
+   which breaks the layout of x-input, so we override it here.
+   @todo: this looks like a quick fix; there may be better way to handle */
+pre > x-input {
+  flex-direction: unset;
+}
