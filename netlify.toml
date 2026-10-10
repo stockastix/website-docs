@@ -1,0 +1,6 @@
+# Otherwise Netlify build fails with error 
+# Secret env var "GITHUB_TOKEN_READ_PACKAGES"'s value detected
+#   found value at line 63810 in .netlify/.next/cache/turbopack/v16.3.8-b0fad0d4/00000009.sst
+# ref https://www.mohamedinfath.com/blog/netlify-secrets-scanning-turbopack-cache
+[build.environment]
+  SECRETS_SCAN_OMIT_PATHS = ".netlify/.next/cache/**,.next/cache/**"
