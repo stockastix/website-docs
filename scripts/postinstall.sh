@@ -12,6 +12,7 @@ rm -r -f ./content/docs/indicators/__test__
 # copy public assets
 cp -a ./node_modules/@stockastix/parse/dist/parse.min.js ./public/
 cp -a ./node_modules/@stockastix/parse/grammar/lang.base.min.json ./public/
+cp -a ./node_modules/@stockastix/parse/grammar/lang.base.json ./public/
 cp -a ./node_modules/@stockastix/x-input/dist/x-input.min.js ./public/
 cp -a ./node_modules/@stockastix/x-input/style/x-input.css ./public/
 
