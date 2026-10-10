@@ -9,5 +9,11 @@ rm -f ./content/docs/indicators/**/*.test.json
 # otherwise npm run build complains because it tries to process the typescript files
 rm -r -f ./content/docs/indicators/__test__
 
+# copy public assets
+cp -a ./node_modules/@stockastix/parse/dist/parse.min.js ./public/
+cp -a ./node_modules/@stockastix/parse/grammar/lang.base.min.json ./public/
+cp -a ./node_modules/@stockastix/x-input/dist/x-input.min.js ./public/
+cp -a ./node_modules/@stockastix/x-input/style/x-input.css ./public/
+
 # run original postinstall from fumadocs
 fumadocs-mdx
