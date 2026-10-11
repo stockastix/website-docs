@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
+import Link from "fumadocs-core/link";
 import { getGithubLastEdit } from "fumadocs-core/content/github";
 import defaultMdxComponents from "fumadocs-ui/mdx";
+import { Card } from "fumadocs-ui/components/card";
 import {
   DocsPage,
   DocsBody,
@@ -45,6 +47,19 @@ export default async function Page(props: {
     >
       <DocsTitle>{title}</DocsTitle>
       {description && <DocsDescription>{description}</DocsDescription>}
+
+      {isTechnicalIndicatorPage && (
+        <Card title="" className="prose">
+          <p style={{ fontSize: "2em" }}>
+            <XInput>{name}</XInput>
+            <XInput type="punct">(</XInput>
+            &lt;<Link href="../expression">expression</Link>&gt;
+            <XInput type="punct">,</XInput>
+            &lt;<Link href=".">number</Link>&gt;
+            <XInput type="punct">)</XInput>
+          </p>
+        </Card>
+      )}
 
       <DocsBody>
         <MDX
